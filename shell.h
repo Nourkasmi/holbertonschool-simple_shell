@@ -17,8 +17,6 @@ void display_prompt(void);
 char **parse_input(char *line);
 void fork_and_execute(char **args, char **env);
 void execute_command(char **args, char **env);
-void print_pid(void);
-void print_ppid(void);
 char **copy_env(char **env);
 void free_env(char **env);
 void env_environ(void);
