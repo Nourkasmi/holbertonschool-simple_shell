@@ -12,13 +12,9 @@
 #define PROMPT "($) "
 #define MAX_ARGS 100
 
-
-void display_prompt(void);
 char **parse_input(char *line);
 void fork_and_execute(char **args, char **env);
 void execute_command(char **args, char **env);
-char **copy_env(char **env);
-void free_env(char **env);
-void env_environ(void);
+char *get_line(void);
 
 #endif

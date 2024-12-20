@@ -10,7 +10,7 @@ char *path_env, *path_copy, *token;
 	if (args[0][0] == '/' || args[0][0] == '.')
 	{
 		if (execve(args[0], args, env) == -1)
-			perror(args[0]);
+			perror("Error executing command");
 	}
 	else
 	{
