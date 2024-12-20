@@ -19,8 +19,6 @@ void fork_and_execute(char **args, char **env);
 void execute_command(char **args, char **env);
 void print_pid(void);
 void print_ppid(void);
-void file_stat(const char *filename);
-void wait_for_child(void);
 char **copy_env(char **env);
 void free_env(char **env);
 void env_environ(void);
