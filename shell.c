@@ -28,6 +28,16 @@ char *line = NULL, **args;
 				free(line);
 				exit(EXIT_SUCCESS);
 			}
+			if (strcmp(args[0], "cd") == 0)
+			{
+				if (args[1] == NULL || chdir(args[1]) == -1)
+				{
+					perror("cd");
+				}
+				free(args);
+				free(line);
+				continue;
+			}
 			if (strcmp(args[0], "env") == 0)
 			{
 				int i;
