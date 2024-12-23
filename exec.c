@@ -45,7 +45,9 @@ void execute_command(char **args, char **env)
     token = strtok(path_copy, ":");
     while (token != NULL)
     {
-        snprintf(full_path, sizeof(full_path), "%s/%s", token, args[0]);
+        strcpy(full_path, token);
+        strcat(full_path, "/");
+        strcat(full_path, args[0]);
 
         if (access(full_path, X_OK) == 0)
         {

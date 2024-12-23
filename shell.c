@@ -28,20 +28,21 @@ char *line = NULL, **args;
 				free(line);
 				exit(EXIT_SUCCESS);
 			}
+            if (strcmp(args[0], "cd") == 0)
+			{
+				handle_cd(args);
+				free(args);
+                free(line);
+                continue;
+			}
 			if (strcmp(args[0], "env") == 0)
-			{
-				int i;
-
-				for (i = 0; env[i]; i++)
-					printf("%s\n", env[i]);
-			}
+				handle_env(env);
 			else
-			{
 				fork_and_execute(args, env);
-			}
 		}
 		free(args);
 		free(line);
 	}
 	return (0);
 }
+
