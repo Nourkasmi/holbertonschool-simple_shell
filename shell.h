@@ -16,5 +16,6 @@ char **parse_input(char *line);
 void fork_and_execute(char **args, char **env);
 void execute_command(char **args, char **env);
 char *get_line(void);
+int is_command_valid(char *cmd);
 
 #endif

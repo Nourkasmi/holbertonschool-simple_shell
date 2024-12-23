@@ -14,13 +14,17 @@ void execute_command(char **args, char **env)
     char *path_env = getenv("PATH");
     char *path_copy = NULL;
     char *token = NULL;
+    int command_found = 0;
 
     if (args[0] == NULL)
         return;
+
+    
     if (args[0][0] == '/' || args[0][0] == '.')
     {
         if (access(args[0], X_OK) == 0)
         {
+            command_found = 1;
             execve(args[0], args, env);
             perror(args[0]);
         }
@@ -30,11 +34,15 @@ void execute_command(char **args, char **env)
         }
         return;
     }
+
+    
     if (path_env == NULL || strlen(path_env) == 0)
     {
         fprintf(stderr, "%s: command not found\n", args[0]);
         return;
     }
+
+    
     path_copy = strdup(path_env);
     if (path_copy == NULL)
     {
@@ -42,22 +50,32 @@ void execute_command(char **args, char **env)
         return;
     }
 
+    
     token = strtok(path_copy, ":");
     while (token != NULL)
     {
-        snprintf(full_path, sizeof(full_path), "%s/%s", token, args[0]);
+        full_path[0] = '\0';
 
+        strcat(full_path, token);
+        strcat(full_path, "/");
+        strcat(full_path, args[0]);
+
+    
         if (access(full_path, X_OK) == 0)
         {
+            command_found = 1;
             execve(full_path, args, env);
-            perror(args[0]);
+            perror(args[0]); 
             break;
         }
 
         token = strtok(NULL, ":");
     }
+
     free(path_copy);
 
-    if (token == NULL)
+    if (!command_found)
+    {
         fprintf(stderr, "%s: command not found\n", args[0]);
+    }
 }
