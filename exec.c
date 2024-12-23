@@ -86,7 +86,28 @@ void execute_command(char **args, char **env)
         fprintf(stderr, "%s: command not found\n", args[0]);
         return;
     }
-    execve(full_path, args, env);
-    perror(args[0]);
-    free(full_path);
+    path_copy = strdup(path_env);
+    if (path_copy == NULL)
+    {
+        perror("strdup");
+        return;
+    }
+
+    token = strtok(path_copy, ":");
+    while (token != NULL)
+    {
+		sprintf(full_path, "%s/%s", token, args[0]);
+        if (access(full_path, X_OK) == 0)
+        {
+            execve(full_path, args, env);
+            perror(args[0]);
+            break;
+        }
+
+        token = strtok(NULL, ":");
+    }
+    free(path_copy);
+
+    if (token == NULL)
+        fprintf(stderr, "%s: command not found\n", args[0]);
 }

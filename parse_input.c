@@ -11,7 +11,6 @@ char **parse_input(char *input)
 char **args = malloc(MAX_ARGS * sizeof(char *));
 char *token;
 int i = 0;
-
 if (!args)
 {
 perror("malloc");
