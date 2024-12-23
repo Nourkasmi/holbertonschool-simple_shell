@@ -45,10 +45,7 @@ void execute_command(char **args, char **env)
     token = strtok(path_copy, ":");
     while (token != NULL)
     {
-        strcpy(full_path, token);
-        strcat(full_path, "/");
-        strcat(full_path, args[0]);
-
+		sprintf(full_path, "%s/%s", token, args[0]);
         if (access(full_path, X_OK) == 0)
         {
             execve(full_path, args, env);
