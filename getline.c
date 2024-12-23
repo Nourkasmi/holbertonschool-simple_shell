@@ -12,6 +12,8 @@ char *line = NULL;
 size_t len = 0;
 	if (getline(&line, &len, stdin) == -1)
 	{
+		 if (isatty(STDIN_FILENO))
+        printf("\n");      
 		free(line);
 		exit(EXIT_SUCCESS);
 	}
