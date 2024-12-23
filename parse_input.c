@@ -13,8 +13,16 @@ char *token;
 int i = 0;
 
 if (!args)
-return (NULL);
+{
+perror("malloc");
+exit(EXIT_FAILURE);
+}
 token = strtok(input, " ");
+if (token == NULL)
+{
+free(args);
+return (NULL);
+}
 while (token != NULL && i < MAX_ARGS - 1)
 {
 args[i] = token;
