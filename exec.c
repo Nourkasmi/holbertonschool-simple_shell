@@ -14,7 +14,8 @@ void execute_command(char **args, char **env)
     char *path_env = NULL;
     char *path_copy = NULL;
     char *token = NULL;
-    extern char **environ; 
+    extern char **environ;
+    int i; 
 
     if (args[0] == NULL)
         return;
@@ -33,8 +34,7 @@ void execute_command(char **args, char **env)
         }
         return;
     }
-
-    for (int i = 0; environ[i] != NULL; i++)
+    for (i= 0; environ[i] != NULL; i++)
     {
         if (strncmp(environ[i], "PATH=", 5) == 0)
         {
