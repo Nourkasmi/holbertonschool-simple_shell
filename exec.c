@@ -10,11 +10,10 @@
  */
 void execute_command(char **args, char **env)
 {
-    char full_path[1024];
+	char full_path[1024];
     char *path_env = getenv("PATH");
     char *path_copy = NULL;
     char *token = NULL;
-
     if (args[0] == NULL)
         return;
     if (args[0][0] == '/' || args[0][0] == '.')
@@ -43,6 +42,8 @@ void execute_command(char **args, char **env)
     }
 
     token = strtok(path_copy, ":");
+	if (token == NULL)
+        fprintf(stderr, "%s: command not found\n", args[0]);
     while (token != NULL)
     {
 		sprintf(full_path, "%s/%s", token, args[0]);
@@ -56,7 +57,4 @@ void execute_command(char **args, char **env)
         token = strtok(NULL, ":");
     }
     free(path_copy);
-
-    if (token == NULL)
-        fprintf(stderr, "%s: command not found\n", args[0]);
 }
