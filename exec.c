@@ -37,24 +37,31 @@ void execute_command(char **args, char **env)
     path_copy = strdup(path_env);
     if (path_copy == NULL)
     {
-        perror("strdup");
+        perror("strdup error");
         return;
     }
-
     token = strtok(path_copy, ":");
-	if (token == NULL)
-        fprintf(stderr, "%s: command not found\n", args[0]);
     while (token != NULL)
     {
-		sprintf(full_path, "%s/%s", token, args[0]);
-        if (access(full_path, X_OK) == 0)
+        size_t token_len = strlen(token);
+        size_t arg_len = strlen(args[0]);
+        if (token_len + 1 + arg_len < sizeof(full_path))
         {
-            execve(full_path, args, env);
-            perror(args[0]);
-            break;
-        }
+            strncpy(full_path, token, sizeof(full_path) - 1);
+            full_path[sizeof(full_path) - 1] = '\0';
+            strncat(full_path, "/", sizeof(full_path) - strlen(full_path) - 1);
+            strncat(full_path, args[0], sizeof(full_path) - strlen(full_path) - 1);
 
+            if (access(full_path, X_OK) == 0)
+            {
+                execve(full_path, args, env);
+                perror(args[0]);
+                break;
+            }
+        }
         token = strtok(NULL, ":");
     }
     free(path_copy);
+    if (token == NULL)
+    fprintf(stderr, "%s: command not found\n", args[0]);
 }
