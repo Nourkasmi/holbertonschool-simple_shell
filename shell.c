@@ -17,16 +17,26 @@ int main(int argc, char **argv, char **env)
     while (1)
     {
         if (isatty(STDIN_FILENO))
+        {
             printf("($) ");
+            fflush(stdout);
+        }
         line = get_line();
+        if (!line)
+            break;
         args = parse_input(line);
+        if (!args)
+        {
+            free(line);
+            continue;
+        }
         if (args && args[0])
         {
             if (strcmp(args[0], "exit") == 0)
             {
                 free(args);
                 free(line);
-                exit(EXIT_SUCCESS);
+                break;
             }
             if (strcmp(args[0], "cd") == 0)
             {
@@ -43,5 +53,6 @@ int main(int argc, char **argv, char **env)
         free(args);
         free(line);
     }
+    free(line);
     return (0);
 }
