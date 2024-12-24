@@ -37,6 +37,7 @@ int main(int argc, char **argv, char **env)
                 free(args);
                 free(line);
                 break;
+                exit(EXIT_SUCCESS);
             }
             if (strcmp(args[0], "cd") == 0)
             {
