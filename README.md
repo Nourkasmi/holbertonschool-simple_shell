@@ -36,4 +36,4 @@ To install and use the simple shell, follow these steps:
    git clone https://github.com/Nourkasmi/holbertonschool-simple_shell.git
 
 ## Flowchart
-![Flowchart](flowchart.png)
+![Flowchart](/holbertonschool-simple_shell/flowchart.png)
