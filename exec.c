@@ -15,7 +15,9 @@ char *path_env = getenv("PATH");
 char *path_copy = NULL;
 char *token = NULL;
 if (args[0] == NULL)
+{
 return;
+}
 if (args[0][0] == '/' || args[0][0] == '.')
 {
 if (access(args[0], X_OK) == 0)
@@ -47,10 +49,7 @@ size_t token_len = strlen(token);
 size_t arg_len = strlen(args[0]);
 if (token_len + 1 + arg_len < sizeof(full_path))
 {
-strncpy(full_path, token, sizeof(full_path) - 1);
-full_path[sizeof(full_path) - 1] = '\0';
-strncat(full_path, "/", sizeof(full_path) - strlen(full_path) - 1);
-strncat(full_path, args[0], sizeof(full_path) - strlen(full_path) - 1);
+sprintf(full_path, "%s/%s", token, args[0]);
 if (access(full_path, X_OK) == 0)
 {
 execve(full_path, args, env);

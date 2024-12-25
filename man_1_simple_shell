@@ -1,0 +1,80 @@
+.TH myshell 1 "December 2024" "Simple Shell" "User Commands"
+
+.SH NAME
+myshell \- a simple shell program for command execution
+
+.SH SYNOPSIS
+.B myshell
+.RI [ "no arguments" ]
+
+.SH DESCRIPTION
+.B myshell
+is a minimal shell program designed to execute commands interactively or through scripts.
+
+.SH USAGE
+Upon starting, the shell presents a prompt:
+.B ($)
+for the user to enter commands.
+
+Supported functionalities include:
+.TP
+.B Running commands
+The shell can execute programs by searching for them in the directories listed in the
+.B PATH
+environment variable or by specifying the absolute/relative path.
+
+.TP
+.B Built-in commands
+The shell supports the following built-in commands:
+.RS
+.IP "\fBexit\fP"
+Exits the shell program.
+.IP "\fBcd\fP"
+Changes the current directory. Usage:
+.B cd [directory]
+.IP "\fBenv\fP"
+Displays the current environment variables.
+.RE
+
+.TP
+.B Input handling
+- Accepts input interactively or via scripts.
+- Exits cleanly on EOF (Ctrl+D).
+
+.SH OPTIONS
+This shell does not support command-line arguments.
+
+.SH FILES
+.TP
+\fBshell.h\fP
+Header file defining shell functions and constants.
+
+.SH ENVIRONMENT
+The shell uses the
+.B PATH
+environment variable to search for executable files.
+
+.SH EXAMPLES
+Run the shell interactively:
+.EX
+./myshell
+($) ls -l
+($) exit
+.EX
+
+Execute a script:
+.EX
+./myshell < script.sh
+.EX
+
+.SH BUGS
+This shell is designed for educational purposes and may not support advanced shell features like piping, redirection, or job control.
+
+.SH AUTHOR
+Developed by Kasmi Nour, Walid Chaouachi
+
+.SH SEE ALSO
+.BR execve (2),
+.BR fork (2),
+.BR getline (3),
+.BR isatty (3)
