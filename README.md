@@ -15,16 +15,16 @@ This project implements a basic Unix-like shell program in C. The shell allows u
   - The shell can execute commands located in the directories listed in the system's `PATH`.
   - The shell supports absolute and relative paths.
 
-- **Requirements**
-  - C Compiler: gcc 
-  - Libraries: stdio.h stdlib.h string.h unistd.h sys/wait.h
-
 - **Compile the shell program with the following command**
   - gcc -Wall -Werror -Wextra -pedantic -o simple_shell *.c
 
 - **Interactive Mode:**
   - Displays a prompt (`($)`) when running interactively.
   - Handles input through `stdin` and outputs to `stdout`.
+
+## Requirements
+  - C Compiler: gcc 
+  - Libraries: stdio.h stdlib.h string.h unistd.h sys/wait.h
 
 ## Installation
 
@@ -34,3 +34,6 @@ To install and use the simple shell, follow these steps:
 
    ```bash
    git clone https://github.com/Nourkasmi/holbertonschool-simple_shell.git
+
+## Flowchart
+![Flowchart](flowchart/flowchart.png)
