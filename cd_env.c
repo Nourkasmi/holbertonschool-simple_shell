@@ -8,11 +8,10 @@
  */
 void handle_cd(char **args)
 {
-                if (args[1] == NULL || chdir(args[1]) == -1)
-                {
-                    perror("cd");
-                }
-
+if (args[1] == NULL || chdir(args[1]) == -1)
+{
+perror("cd");
+}
 }
 
 /**
@@ -23,8 +22,7 @@ void handle_cd(char **args)
  */
 void handle_env(char **env)
 {
-    int i;
-
-    for (i = 0; env[i]; i++)
-        printf("%s\n", env[i]);
+int i;
+for (i = 0; env[i]; i++)
+printf("%s\n", env[i]);
 }
